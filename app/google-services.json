@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "929803321633",
+    "project_id": "quiziton-4ad00",
+    "storage_bucket": "quiziton-4ad00.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929803321633:android:6a6cd9f13f96beb1183e60",
+        "android_client_info": {
+          "package_name": "com.example.quiziton"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGs43gu3ikACLVIXua3XFhc4jWmeQ6A78"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
