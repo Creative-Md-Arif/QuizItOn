@@ -4,18 +4,78 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.activity.enableEdgeToEdge
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
+import com.example.quiziton.databinding.ActivityRegistrationBinding
+import com.example.quiziton.viewmodel.AuthViewModel
 
 class RegistrationActivity : AppCompatActivity() {
+    private lateinit var viewModel: AuthViewModel
+    private lateinit var binding: ActivityRegistrationBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_registration)
-        Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this@RegistrationActivity, LoginActivity ::class.java))
+        binding = ActivityRegistrationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        }, 3000)
+        viewModel = ViewModelProvider(this)[AuthViewModel::class.java]
+
+        binding.registerBtn.setOnClickListener {
+            val name = binding.nameEditTxt.text.toString().trim()
+            val email = binding.emailEditTxt.text.toString().trim()
+            val password = binding.passEditTxt.text.toString().trim()
+            val conPass = binding.conPassEditTxt.text.toString().trim()
+            val checkBox = binding.termsCheckBox.isChecked
+
+            // Validate inputs
+            if (name.isEmpty()) {
+                binding.nameEditTxt.error = "Name is required"
+            } else if (email.isEmpty()) {
+                binding.emailEditTxt.error = "Email is required"
+            } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                binding.emailEditTxt.error = "Enter a valid email"
+            } else if (password.isEmpty()) {
+                binding.passEditTxt.error = "Password is required"
+            } else if (password.length < 6) {
+                binding.passEditTxt.error = "Password must be at least 6 characters"
+            } else if (conPass.isEmpty()) {
+                binding.conPassEditTxt.error = "Confirm password is required"
+            } else if (conPass != password) {
+                binding.conPassEditTxt.error = "Passwords do not match"
+            } else if (!checkBox) {
+                Toast.makeText(this, "You must accept the terms and conditions", Toast.LENGTH_SHORT).show()
+            } else {
+                // Show loading animation
+                showLoading()
+
+                viewModel.signUp(email, password).observe(this) { message ->
+                    hideLoading()
+
+                    if (message == "Registration successful. Please check your email to verify your account.") {
+                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
+
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            startActivity(Intent(this@RegistrationActivity, LoginActivity::class.java))
+                        }, 3000)
+                    } else {
+                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun showLoading() {
+        binding.progressBar.visibility = View.VISIBLE
+        binding.registerBtn.isEnabled = false // Disable the login button while loading
+    }
+
+    private fun hideLoading() {
+        binding.progressBar.visibility = View.GONE
+        binding.registerBtn.isEnabled = true // Re-enable the login button
+
     }
 }

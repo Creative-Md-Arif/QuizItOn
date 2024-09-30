@@ -7,6 +7,9 @@ plugins {
 android {
     namespace = "com.example.quiziton"
     compileSdk = 34
+    buildFeatures {
+       viewBinding = true
+    }
 
     defaultConfig {
         applicationId = "com.example.quiziton"

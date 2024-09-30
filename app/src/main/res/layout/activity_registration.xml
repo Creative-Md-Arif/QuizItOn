@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="@drawable/background"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -113,7 +113,9 @@
                 <CheckBox
                     android:id="@+id/termsCheckBox"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -127,7 +129,7 @@
 
             <!-- Submit Button -->
             <Button
-                android:id="@+id/updateBtn"
+                android:id="@+id/registerBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -138,6 +140,13 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:cornerRadius="10dp" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
 
             <!-- Already have an account? Sign in -->
             <TextView
