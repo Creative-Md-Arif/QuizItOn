@@ -19,7 +19,8 @@ class AuthViewModel : ViewModel() {
                 if (task.isSuccessful) {
                     auth.currentUser?.sendEmailVerification()?.addOnCompleteListener { emailTask ->
                         if (emailTask.isSuccessful) {
-                            result.value = "Registration successful. Please check your email to verify your account."
+                            result.value =
+                                "Registration successful. Please check your email to verify your account."
                         } else {
                             result.value = emailTask.exception?.message
                         }
@@ -33,9 +34,6 @@ class AuthViewModel : ViewModel() {
     }
 
 //  EmailVerified
-
-
-
 
 
 //    sign in function
@@ -65,6 +63,21 @@ class AuthViewModel : ViewModel() {
 
     }
 
+    // Send password reset email function
+    fun sendPasswordResetEmail(email: String): LiveData<String> {
+        val result = MutableLiveData<String>()
+
+        auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    result.value = "Verification code sent to your email."
+                } else {
+                    result.value = task.exception?.message ?: "Failed to send verification code."
+                }
+            }
+
+        return result
+    }
 
 
 }
