@@ -61,6 +61,13 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+        binding.signInText.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, RegistrationActivity::class.java))
+        }
+
+        binding.forgotPasswordText.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, InputEmailActivity::class.java))
+        }
     }
 
     private fun showLoading() {
@@ -72,4 +79,5 @@ class LoginActivity : AppCompatActivity() {
         binding.progressBar.visibility = View.GONE // Hide the ProgressBar
         binding.loginBtn.isEnabled = true // Re-enable the login button
     }
+
 }

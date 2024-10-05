@@ -20,8 +20,10 @@ class RegistrationActivity : AppCompatActivity() {
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Initialize ViewModel
         viewModel = ViewModelProvider(this)[AuthViewModel::class.java]
 
+        // Set up Register button click event
         binding.registerBtn.setOnClickListener {
             val name = binding.nameEditTxt.text.toString().trim()
             val email = binding.emailEditTxt.text.toString().trim()
@@ -50,13 +52,14 @@ class RegistrationActivity : AppCompatActivity() {
                 // Show loading animation
                 showLoading()
 
+                // Register user via ViewModel
                 viewModel.signUp(email, password).observe(this) { message ->
                     hideLoading()
 
                     if (message == "Registration successful. Please check your email to verify your account.") {
                         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
-
+                        // Navigate to LoginActivity after a delay
                         Handler(Looper.getMainLooper()).postDelayed({
                             startActivity(Intent(this@RegistrationActivity, LoginActivity::class.java))
                         }, 3000)
@@ -66,16 +69,22 @@ class RegistrationActivity : AppCompatActivity() {
                 }
             }
         }
+
+        // Set up Sign-in text click listener to navigate to LoginActivity
+        binding.signInText.setOnClickListener {
+            startActivity(Intent(this@RegistrationActivity, LoginActivity::class.java))
+        }
     }
 
+    // Show loading progress bar
     private fun showLoading() {
         binding.progressBar.visibility = View.VISIBLE
-        binding.registerBtn.isEnabled = false // Disable the login button while loading
+        binding.registerBtn.isEnabled = false // Disable the button while loading
     }
 
+    // Hide loading progress bar
     private fun hideLoading() {
         binding.progressBar.visibility = View.GONE
-        binding.registerBtn.isEnabled = true // Re-enable the login button
-
+        binding.registerBtn.isEnabled = true 
     }
 }

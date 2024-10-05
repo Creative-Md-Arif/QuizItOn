@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="20dp">
+
+    <!-- Forgot Password Text -->
+
+
+    <TextView
+        android:id="@+id/forgotPasswordTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="47dp"
+        android:fontFamily="@font/acme"
+        android:text="Forgot Password?"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/forgotPasswordImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/forgotPasswordImage"
+        android:layout_width="220dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/picture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forgotPasswordTitle" />
+
+    <!-- Verification Code Text -->
+    <TextView
+        android:id="@+id/verifiTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/adamina"
+        android:text="Where would you like to receive a Verification Code?"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forgotPasswordImage" />
+
+    <!-- Email Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        app:boxStrokeColor="#6200EE"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/verifiTxt"
+        app:layout_constraintTop_toBottomOf="@+id/verifiTxt">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailEditTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Next Button -->
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="@color/black"
+        android:text="Next"
+        app:layout_constraintEnd_toEndOf="@+id/emailInputLayout"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/emailInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/emailInputLayout" /> <!-- Adjust to your theme -->
+        android:textColor="@android:color/white"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
